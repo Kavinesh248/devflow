@@ -1,8 +1,10 @@
 import { auth } from "@/auth";
+import QuestionCard from "@/components/cards/QuestionCard";
 import HomeFilter from "@/components/filter/HomeFilter";
 import LocalSearch from "@/components/search/LocalSearch";
 import { Button } from "@/components/ui/button";
 import ROUTES from "@/constants/routes";
+import { create } from "domain";
 import Link from "next/link";
 import React from "react";
 
@@ -13,15 +15,22 @@ const questions = [
     description:
       "Next.js is a React framework for building server-side rendered applications.",
     tags: [
-      { _id: "1", name: "React" },
+      {
+        _id: "1",
+        name: "React",
+      },
       { _id: "2", name: "Javascript" },
     ],
     author: {
       _id: "123",
       name: "John Doe",
+      image:
+        "https://static.vecteezy.com/system/resources/thumbnails/000/439/863/small/Basic_Ui__28186_29.jpg",
     },
     upvotes: 10,
     answers: 5,
+    views: 100,
+    createdAt: new Date("2023-10-01T12:00:00Z"),
   },
   {
     _id: "2",
@@ -35,9 +44,13 @@ const questions = [
     author: {
       _id: "456",
       name: "Jane Smith",
+      image:
+        "https://static.vecteezy.com/system/resources/thumbnails/000/439/863/small/Basic_Ui__28186_29.jpg",
     },
     upvotes: 20,
     answers: 8,
+    views: 200,
+    createdAt: new Date("2023-10-01T12:00:00Z"),
   },
 ];
 
@@ -83,7 +96,7 @@ export default async function Home({ searchParams }: SearchParamsProps) {
       <HomeFilter />
       <div className="mt-10 flex w-full flex-col gap-6">
         {filteredQuestions.map((question) => (
-          <h1 key={question._id}>{question.title}</h1>
+          <QuestionCard key={question._id} question={question} />
         ))}
       </div>
     </>
