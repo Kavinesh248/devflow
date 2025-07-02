@@ -1,7 +1,7 @@
-import { Schema, models, model } from "mongoose";
+import { Schema, model, models, Types, Document } from "mongoose";
 
 export interface IAccount {
-  userId: Schema.Types.ObjectId;
+  userId: Types.ObjectId;
   name: string;
   image?: string;
   password?: string;
@@ -9,38 +9,19 @@ export interface IAccount {
   providerAccountId: string;
 }
 
-const accountSchema = new Schema<IAccount>(
+export interface IAccountDoc extends IAccount, Document {}
+const AccountSchema = new Schema<IAccount>(
   {
-    userId: {
-      type: Schema.Types.ObjectId,
-      ref: "User",
-      required: true,
-    },
-    name: {
-      type: String,
-      required: true,
-    },
-    image: {
-      type: String,
-      required: true,
-    },
-    password: {
-      type: String,
-      required: true,
-    },
-    provider: {
-      type: String,
-      required: true,
-    },
-    providerAccountId: {
-      type: String,
-      required: true,
-    },
+    userId: { type: Schema.Types.ObjectId, ref: "User", required: true },
+    name: { type: String, required: true },
+    image: { type: String },
+    password: { type: String },
+    provider: { type: String, required: true },
+    providerAccountId: { type: String, required: true },
   },
-  {
-    timestamps: true,
-  }
+  { timestamps: true }
 );
 
-const Account = models?.Account || model<IAccount>("Account", accountSchema);
+const Account = models?.Account || model<IAccount>("Account", AccountSchema);
+
 export default Account;
