@@ -22,7 +22,7 @@ if (!cached) {
   cached = global.Mongoose = { conn: null, promise: null };
 }
 
-const dbConnect = async (): Promise<Mongoose> => {
+export const dbConnect = async (): Promise<Mongoose> => {
   if (cached.conn) {
     logger.info("Using cached MongoDB connection");
     return cached.conn;
