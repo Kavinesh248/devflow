@@ -38,8 +38,8 @@ export async function POST(request: Request) {
       throw new Error("Username already exists");
     }
 
-    const user = await User.create(validateData.data);
-    return NextResponse.json({ success: true, data: user }, { status: 201 });
+    const newUser = await User.create(validateData.data);
+    return NextResponse.json({ success: true, data: newUser }, { status: 201 });
   } catch (error) {
     return handleError(error, "api") as APIErrorResponse;
   }
