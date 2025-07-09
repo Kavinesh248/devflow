@@ -3,7 +3,7 @@ import { NextResponse } from "next/server";
 import Account from "@/database/account.model";
 import handleError from "@/lib/handlers/error";
 import { NotFoundError, ValidationError } from "@/lib/http-errors";
-import { AccountSchema, UserSchema } from "@/lib/validations";
+import { AccountSchema } from "@/lib/validations";
 import { dbConnect } from "@/lib/mongoose";
 
 // GET /api/users/[id]
