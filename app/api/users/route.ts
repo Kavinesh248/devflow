@@ -31,7 +31,7 @@ export async function POST(request: Request) {
     const { email, username } = validateData.data;
 
     const existingUser = await User.findOne({ email });
-    if (!existingUser) throw new Error("User already exists with this email");
+    if (existingUser) throw new Error("User already exists with this email");
 
     const existingUsername = await User.findOne({ username });
     if (existingUsername) {
